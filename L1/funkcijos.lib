@@ -1,0 +1,30 @@
+#!/bin/bash
+
+failu_sarasas() {
+shift
+local priesagos=("$@")
+for i in ${!priesagos[*]}; do
+for j in `ls /*.${priesagos[$i]} 2> klaidos.txt`; do
+echo $j
+done
+done
+}
+
+failu_dydziai() {
+shift
+local priesagos=("$@")
+sizes=()
+for i in ${!priesagos[*]}; do
+for j in `ls -l /*.${priesagos[$i]} 2> klaidos.txt | awk '{print $5}'`; do
+sizes+=("$j")
+done
+done
+}
+
+suma() {
+sum=0
+local sizes=("$@")
+for i in ${!sizes[*]}; do
+sum=$(( sum + sizes[i] ))
+done
+}
